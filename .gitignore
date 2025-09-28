@@ -1,0 +1,12 @@
+## backend stuff
+virtual_env/
+__pycache__/
+
+
+## frontend stuff
+.env
+node_modules/
+
+# React Router
+.react-router/
+build/

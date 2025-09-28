@@ -1,1 +1,1 @@
-# online_quiz_app
+# Online Quiz Application

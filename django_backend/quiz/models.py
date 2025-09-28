@@ -4,6 +4,7 @@ class Quiz(models.Model):
     quiz_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     questions:"models.QuerySet[Question]"
+    has_started = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "Quizzes"

@@ -1,7 +1,8 @@
 from django.db import models
 
 class Quiz(models.Model):
-    pass
+    class Meta:
+        verbose_name_plural = "Quizzes"
 
 class Question(models.Model):
     part_of_quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name="questions")

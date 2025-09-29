@@ -20,6 +20,19 @@ def get_all_quizzes(request: "HttpRequest") -> HttpResponse:
         return HttpResponseNotAllowed(permitted_methods=["GET"])
 
 
+def get_quiz_info(request: "HttpRequest", quiz_id: "int") -> HttpResponse:
+    if request.method == "GET":
+        quiz = Quiz.objects.filter(quiz_id=quiz_id).first()
+        if quiz != None:
+            quiz_s = Quiz_Serializer(quiz)
+            response_data = json_renderer.render(quiz_s.data)
+            return HttpResponse(response_data, headers={"Content-type": "application/json"})    
+        else:
+            return HttpResponseBadRequest("This quiz does not exist.")
+    else:
+        return HttpResponseNotAllowed(permitted_methods=["GET"])
+
+
 def start_quiz(request: "HttpRequest", quiz_id: "int") -> HttpResponse:
     if request.method == "GET":
         quiz = Quiz.objects.filter(quiz_id=quiz_id).first()

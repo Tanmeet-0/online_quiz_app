@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models.expressions import RawSQL
 
 class Quiz(models.Model):
     quiz_id = models.AutoField(primary_key=True)
@@ -21,6 +21,7 @@ class Question(models.Model):
     options: "models.QuerySet[Option]"
     correct_option: "models.OneToOneField[Option | None]"
     correct_option = models.OneToOneField("Option", on_delete=models.CASCADE, null=True, blank=True)
+    # add checking for correct_option in options
 
     def __str__(self):
         return self.description

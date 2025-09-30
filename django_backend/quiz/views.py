@@ -26,39 +26,25 @@ def get_quiz_info(request: "HttpRequest", quiz_id: "int") -> HttpResponse:
         if quiz != None:
             quiz_s = Quiz_Serializer(quiz)
             response_data = json_renderer.render(quiz_s.data)
-            return HttpResponse(response_data, headers={"Content-type": "application/json"})    
+            return HttpResponse(response_data, headers={"Content-type": "application/json"})
         else:
             return HttpResponseBadRequest("This quiz does not exist.")
     else:
         return HttpResponseNotAllowed(permitted_methods=["GET"])
 
 
-def start_quiz(request: "HttpRequest", quiz_id: "int") -> HttpResponse:
+def start_quiz_and_get_all_questions(request: "HttpRequest", quiz_id: "int") -> HttpResponse:
     if request.method == "GET":
         quiz = Quiz.objects.filter(quiz_id=quiz_id).first()
         if quiz != None:
             if not quiz.has_started:
-                quiz.has_started = True
-                quiz.save()
-                return HttpResponse("The quiz has started.")
-            else:
-                return HttpResponseBadRequest("This quiz has already started.")
-        else:
-            return HttpResponseBadRequest("This quiz does not exist.")
-    else:
-        return HttpResponseNotAllowed(permitted_methods=["GET"])
-
-
-def get_all_questions_of_a_quiz(request: "HttpRequest", quiz_id: "int") -> HttpResponse:
-    if request.method == "GET":
-        quiz = Quiz.objects.filter(quiz_id=quiz_id).first()
-        if quiz != None:
-            if quiz.has_started:
                 questions = Question_Serializer(quiz.questions.all(), many=True)
                 response_data = json_renderer.render(questions.data)
+                quiz.has_started = True
+                quiz.save()
                 return HttpResponse(response_data, headers={"Content-type": "application/json"})
             else:
-                return HttpResponseBadRequest("The quiz has not started.")
+                return HttpResponseBadRequest("This quiz has already started.")
         else:
             return HttpResponseBadRequest("This quiz does not exist.")
     else:
@@ -82,6 +68,6 @@ def submit_quiz_answers_and_get_result(request: "HttpRequest", quiz_id: "int") -
             else:
                 return HttpResponseBadRequest("This quiz does not exist.")
         else:
-            return HttpResponse(content="JSON data expected.", status=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
+            return HttpResponse(content="JSON data expected.", status=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)  # add accept post header
     else:
         return HttpResponseNotAllowed(permitted_methods=["POST"])

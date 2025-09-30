@@ -4,7 +4,7 @@ const BASE_URL = "http://127.0.0.1:8000/quiz";
 const HEADERS = { Accept: "application/json" };
 
 export async function get_all_quizzes(): Promise<Quiz[]> {
-    const url = BASE_URL;
+    const url = `${BASE_URL}/all`;
     var response = await fetch(url, { headers: HEADERS });
     var quizzes = await response.json();
     return quizzes as Quiz[];

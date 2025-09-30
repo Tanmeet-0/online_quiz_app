@@ -15,8 +15,8 @@ export type Option = {
     value:string,
 }
 
-export type Answer = {
-    [index:number]:number
+export type Chosen_Options = {
+    [index:string]:number
 }
 
 export type Question_Result = {

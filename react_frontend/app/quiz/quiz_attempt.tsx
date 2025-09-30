@@ -19,10 +19,12 @@ type Choose_Option_For_Question = (question_id: number, option_id: number) => vo
 
 export default function Quiz_Attempt({ loaderData }: Route.ComponentProps) {
     const [question_index, set_question_index] = useState(0);
+    const [force_update_value, force_update] = useState(true);
     const quiz_context = useOutletContext<Quiz_Context>();
 
     const choose_option_for_question: Choose_Option_For_Question = function (question_id: number, option_id: number) {
         quiz_context.chosen_options_ref.current[question_id] = option_id;
+        force_update(!force_update_value);
     };
 
     const questions = loaderData.has_data
@@ -58,9 +60,11 @@ export default function Quiz_Attempt({ loaderData }: Route.ComponentProps) {
                         Next Question
                     </button>
                     <br />
-                    <Link to={{ pathname: get_pathname_to_quiz_result(quiz_context.quiz) }}>
-                        Submit Quiz
-                    </Link>
+                    {Object.keys(quiz_context.chosen_options_ref.current).length == questions!.length ? (
+                        <Link to={get_pathname_to_quiz_result(quiz_context.quiz)}>Submit Quiz</Link>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             ) : (
                 "The Quiz Could Not Be Loaded."
@@ -84,6 +88,7 @@ function Question_C({
                     choose_option_for_question(question.question_id, parseInt(event.target.value));
                 }}
             >
+                <option hidden disabled selected></option>
                 {question.options.map((option) => {
                     return (
                         <option key={option.option_id} value={option.option_id}>

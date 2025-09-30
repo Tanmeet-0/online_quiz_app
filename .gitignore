@@ -3,7 +3,8 @@
 ## backend stuff
 virtual_env/
 __pycache__/
-
+migrations/
+db.sqlite3
 
 ## frontend stuff
 .env

@@ -1,12 +1,12 @@
 import { get_all_quizzes } from "../utils/api";
 import type { Quiz } from "../utils/api_types";
 import { Link } from "react-router";
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/all_quizzes";
 import { get_pathname_to_attempt_quiz } from "../routes";
 
 export async function clientLoader() {
     try {
-        var quizzes = await get_all_quizzes();
+        const quizzes = await get_all_quizzes();
         return { quizzes: quizzes, has_data: true };
     } catch (error) {
         return { error: String(error), has_data: false };

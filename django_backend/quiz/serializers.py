@@ -22,9 +22,8 @@ class Question_Serializer(serializers.Serializer):
     options = Option_Serializer(many=True)
 
 
-class Question_Result_Serializer(serializers.Serializer):
+class Question_Result_Serializer(Question_Serializer):
     # add error handling
-    question_id = serializers.IntegerField()
     correct_option_id = serializers.SerializerMethodField()
     chosen_option_id = serializers.SerializerMethodField()
     is_correct = serializers.SerializerMethodField()

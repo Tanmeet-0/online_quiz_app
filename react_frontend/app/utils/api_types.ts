@@ -19,8 +19,7 @@ export type Chosen_Options = {
     [index:string]:number
 }
 
-export type Question_Result = {
-    question_id : number
+export type Question_Result = Question & {
     correct_option_id:number,
     chosen_option_id:number,
     is_correct:boolean

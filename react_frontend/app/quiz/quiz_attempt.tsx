@@ -8,7 +8,7 @@ import { get_pathname_to_quiz_result } from "../routes";
 
 export async function clientLoader({ params }: Route.LoaderArgs) {
     try {
-        var questions = await start_quiz_and_get_quiz_questions(params.quiz_id);
+        const questions = await start_quiz_and_get_quiz_questions(params.quiz_id);
         return { questions: questions, has_data: true };
     } catch (error) {
         return { error: String(error), has_data: false };
@@ -18,7 +18,6 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
 type Choose_Option_For_Question = (question_id: number, option_id: number) => void;
 
 export default function Quiz_Attempt({ loaderData }: Route.ComponentProps) {
-    const [question_index, set_question_index] = useState(0);
     const [force_update_value, force_update] = useState(true);
     const quiz_context = useOutletContext<Quiz_Context>();
 
@@ -39,6 +38,7 @@ export default function Quiz_Attempt({ loaderData }: Route.ComponentProps) {
           })
         : null;
 
+    const [question_index, set_question_index] = useState(0);
     function previous_question() {
         set_question_index(question_index - 1);
     }

@@ -1,3 +1,107 @@
-span.but{
-    padding: 100px;
+:root {
+    --background: rgb(25, 17, 18);
+    --on_background: rgb(240, 222, 223);
+
+    --primary: rgb(255, 178, 189);
+    --on_primary: rgb(86, 29, 41);
+    --primary_container: rgb(114, 51, 63);
+    --on_primary_container: rgb(255, 217, 223);
+
+    --secondary: rgb(229, 189, 193);
+    --on_secondary: rgb(67, 41, 45);
+    --secondary_container: rgb(92, 63, 67);
+    --on_secondary_container: rgb(255, 217, 221);
+
+    --tertiary: rgb(234, 191, 143);
+    --on_tertiary: rgb(69, 43, 7);
+    --tertiary_container: rgb(94, 65, 28);
+    --on_tertiary_container: rgb(255, 221, 185);
+
+    --light_highlight: inset 0 0 0 1000px rgb(255, 255, 255, 0.1);
+    --dark_highlight: inset 0 0 0 1000px rgb(0, 0, 0, 0.1);
+
+    --disabled: rgb(82, 67, 69);
+    --on_disabled: rgb(214, 194, 195);
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    text-align: center;
+    background-color: var(--background);
+    color: var(--on_background);
+    font-size: x-large;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+div.error {
+}
+
+a.quiz_start {
+    background-color: var(--primary_container);
+    color: var(--on_primary_container);
+    display: block;
+}
+
+a.quiz_start:is(:hover, :focus) {
+    box-shadow: var(--light_highlight);
+}
+
+div.quiz_layout {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+div.questions {
+    background-color: var(--primary_container);
+    color: var(--on_primary_container);
+    height: 100%;
+}
+
+label.option {
+    background-color: var(--primary);
+    color: var(--on_primary);
+}
+
+label.option:is(:hover, :focus) {
+    box-shadow: var(--dark_highlight);
+}
+
+input.option {
+}
+
+button.question_change {
+    background-color: var(--secondary);
+    color: var(--on_secondary);
+    border: none;
+}
+
+button.question_change:is(:hover, :focus):not(:disabled) {
+    box-shadow: var(--dark_highlight);
+}
+
+button.question_change:disabled {
+    background-color: var(--disabled);
+    color: var(--on_disabled);
+}
+
+a.quiz_submit {
+    background-color: var(--tertiary);
+    color: var(--on_tertiary);
+    display: block;
+}
+
+a.quiz_submit:is(:hover, :focus) {
+    box-shadow: var(--dark_highlight);
 }

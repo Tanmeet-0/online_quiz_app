@@ -15,26 +15,12 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
     }
 }
 
-type Choose_Option_For_Question = (question_id: number, option_id: number) => void;
-
 export default function Quiz_Attempt({ loaderData }: Route.ComponentProps) {
-    const [force_update_value, force_update] = useState(true);
     const quiz_context = useOutletContext<Quiz_Context>();
-
-    const choose_option_for_question: Choose_Option_For_Question = function (question_id: number, option_id: number) {
-        quiz_context.chosen_options_ref.current[question_id] = option_id;
-        force_update(!force_update_value);
-    };
 
     const questions = loaderData.has_data
         ? loaderData.questions!.map((question) => {
-              return (
-                  <Question_C
-                      key={question.question_id}
-                      question={question}
-                      choose_option_for_question={choose_option_for_question}
-                  />
-              );
+              return <Question_C key={question.question_id} question={question} />;
           })
         : null;
 
@@ -47,56 +33,62 @@ export default function Quiz_Attempt({ loaderData }: Route.ComponentProps) {
         set_question_index(question_index + 1);
     }
 
-    return (
-        <div>
-            {quiz_context.quiz != undefined && loaderData.has_data ? (
-                <div>
-                    {questions![question_index]}
-                    <br />
-                    <button id="previous_question" onClick={previous_question} disabled={question_index == 0}>
-                        Previous Question
-                    </button>
-                    <button id="next_question" onClick={next_question} disabled={question_index == questions!.length - 1}>
-                        Next Question
-                    </button>
-                    <br />
-                    {Object.keys(quiz_context.chosen_options_ref.current).length == questions!.length ? (
-                        <Link to={get_pathname_to_quiz_result(quiz_context.quiz)}>Submit Quiz</Link>
-                    ) : (
-                        <></>
-                    )}
-                </div>
+    return quiz_context.quiz != undefined && loaderData.has_data ? (
+        <div className="questions">
+            {questions![question_index]}
+
+            <button className="question_change" onClick={previous_question} disabled={question_index == 0}>
+                Previous Question
+            </button>
+            <button className="question_change" onClick={next_question} disabled={question_index == questions!.length - 1}>
+                Next Question
+            </button>
+
+            {Object.keys(quiz_context.chosen_options).length == questions!.length ? (
+                <Link to={get_pathname_to_quiz_result(quiz_context.quiz)} className="quiz_submit">
+                    Submit Quiz
+                </Link>
             ) : (
-                "The Quiz Could Not Be Loaded."
+                ""
             )}
         </div>
+    ) : (
+        <div className="error">The Quiz Could Not Be Started</div>
     );
 }
 
-function Question_C({
-    question,
-    choose_option_for_question,
-}: {
-    question: Question;
-    choose_option_for_question: Choose_Option_For_Question;
-}) {
+function Question_C({ question }: { question: Question }) {
+    const quiz_context = useOutletContext<Quiz_Context>();
+
     return (
         <div>
             {question.description}
-            <select
-                onChange={(event) => {
-                    choose_option_for_question(question.question_id, parseInt(event.target.value));
-                }}
-            >
-                <option hidden disabled selected></option>
-                {question.options.map((option) => {
-                    return (
-                        <option key={option.option_id} value={option.option_id}>
+
+            {question.options.map((option) => {
+                return (
+                    <div>
+                        <label key={option.option_id} className="option">
+                            <input
+                                className="option"
+                                type="radio"
+                                name="an_option"
+                                value={option.option_id}
+                                checked={
+                                    Object.hasOwn(quiz_context.chosen_options, question.question_id)
+                                        ? quiz_context.chosen_options[question.question_id] == option.option_id
+                                        : false
+                                }
+                                onChange={(event) => {
+                                    const new_chosen_options = { ...quiz_context.chosen_options };
+                                    new_chosen_options[question.question_id] = parseInt(event.target.value);
+                                    quiz_context.set_chosen_options(new_chosen_options);
+                                }}
+                            />
                             {option.value}
-                        </option>
-                    );
-                })}
-            </select>
+                        </label>
+                    </div>
+                );
+            })}
         </div>
     );
 }

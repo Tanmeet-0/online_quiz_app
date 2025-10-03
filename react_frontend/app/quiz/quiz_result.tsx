@@ -14,7 +14,7 @@ export default function Quiz_Result({}: Route.ComponentProps) {
     const quiz_context = useOutletContext<Quiz_Context>();
     useEffect(() => {
         if (fetcher.data == undefined && fetcher.state == "idle" && quiz_context.quiz != undefined) {
-            fetcher.submit(quiz_context.chosen_options_ref.current, {
+            fetcher.submit(quiz_context.chosen_options, {
                 action: "",
                 method: "POST",
                 encType: "application/json",
@@ -40,39 +40,36 @@ export default function Quiz_Result({}: Route.ComponentProps) {
         set_question_result_index(question_result_index + 1);
     }
 
-    return (
-        <div>
-            {fetcher.data != undefined ? (
-                fetcher.data.has_data ? (
-                    <div>
-                        Score:
-                        {fetcher.data.question_results!.reduce((total_correct, question_result) => {
-                            return question_result.is_correct ? total_correct + 1 : total_correct;
-                        }, 0)}
-                        /{quiz_context.quiz!.no_of_questions}
-                        <br />
-                        {question_results![question_result_index]}
-                        <br />
-                        <button id="previous_question" onClick={previous_question} disabled={question_result_index == 0}>
-                            Previous Question
-                        </button>
-                        <button
-                            id="next_question"
-                            onClick={next_question}
-                            disabled={question_result_index == question_results!.length - 1}
-                        >
-                            Next Question
-                        </button>
-                        <br />
-                        <Link to={get_pathname_to_all_quizzes()}>Go To All Quizzes</Link>
-                    </div>
-                ) : (
-                    "The Results Could Not Be Loaded"
-                )
-            ) : (
-                "Loading Results..."
-            )}
-        </div>
+    return fetcher.data != undefined ? (
+        fetcher.data.has_data ? (
+            <div>
+                Score:
+                {fetcher.data.question_results!.reduce((total_correct, question_result) => {
+                    return question_result.is_correct ? total_correct + 1 : total_correct;
+                }, 0)}
+                {" / "}
+                {quiz_context.quiz!.no_of_questions}
+                <br />
+                {question_results![question_result_index]}
+                <br />
+                <button className="question_change" onClick={previous_question} disabled={question_result_index == 0}>
+                    Previous Question
+                </button>
+                <button
+                    className="question_change"
+                    onClick={next_question}
+                    disabled={question_result_index == question_results!.length - 1}
+                >
+                    Next Question
+                </button>
+                <br />
+                <Link to={get_pathname_to_all_quizzes()}>Go To All Quizzes</Link>
+            </div>
+        ) : (
+            <div className="error">The Results Could Not Be Loaded</div>
+        )
+    ) : (
+        <div className="loading"> Loading Results... </div>
     );
 }
 

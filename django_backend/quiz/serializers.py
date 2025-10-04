@@ -23,20 +23,25 @@ class Question_Serializer(serializers.Serializer):
 
 
 class Question_Result_Serializer(Question_Serializer):
-    # add error handling
     correct_option_id = serializers.SerializerMethodField()
     chosen_option_id = serializers.SerializerMethodField()
     is_correct = serializers.SerializerMethodField()
 
     def get_correct_option_id(self, instance: "Question"):
+        if instance.correct_option == None:
+            raise Exception("result cannot be generated for a question without a correct option")
         return instance.correct_option.option_id
 
     def get_chosen_option_id(self, instance: "Question"):
         chosen_options: "dict[str,int]" = self.context["chosen_options"]
         str_question_id = str(instance.question_id)
+        if str_question_id not in chosen_options:
+            raise Exception("cannot generate result when no answer was chosen for a question")
         return chosen_options[str_question_id]
 
     def get_is_correct(self, instance: "Question"):
+        if instance.correct_option == None:
+            raise Exception("result cannot be generated for a question without a correct option")
         chosen_options: "dict[str,int]" = self.context["chosen_options"]
         str_question_id = str(instance.question_id)
         return chosen_options[str_question_id] == instance.correct_option.option_id

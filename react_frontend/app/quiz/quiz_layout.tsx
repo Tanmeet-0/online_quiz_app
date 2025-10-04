@@ -22,22 +22,17 @@ export type Quiz_Context = {
 export default function Quiz_Home({ loaderData }: Route.ComponentProps) {
     const [chosen_options, set_chosen_options] = useState<Chosen_Options>({});
     const quiz_context: Quiz_Context = {
-        quiz: undefined,
+        quiz: loaderData.quiz,
         chosen_options: chosen_options,
         set_chosen_options: set_chosen_options,
     };
-    if (quiz_context.quiz == undefined && loaderData.has_data) {
-        quiz_context.quiz = loaderData.quiz!;
-    }
 
     return (
         <div className="quiz_layout">
             {loaderData.has_data ? (
-                <div>
+                <div className="quiz_info">
                     <h1>{loaderData.quiz!.name}</h1>
-                    <h2>
-                        {loaderData.quiz!.no_of_questions} question{loaderData.quiz!.no_of_questions == 1 ? "" : "s"}
-                    </h2>
+                    <h2>{`${loaderData.quiz!.no_of_questions} question${loaderData.quiz!.no_of_questions == 1 ? "" : "s"}`}</h2>
                 </div>
             ) : (
                 <div className="error">The Quiz Could Not Be Loaded </div>

@@ -17,11 +17,22 @@
     --tertiary_container: rgb(94, 65, 28);
     --on_tertiary_container: rgb(255, 221, 185);
 
+    --correct: rgb(0, 200, 83);
+    --incorrect: rgb(255, 0, 0);
+
+    --elevated_highlight: 0 0 15px 5px rgba(0, 0, 0, 0.2);
+
+    --correct_highlight: inset 0 0 0 1000px rgba(0, 255, 0, 0.15);
+    --incorrect_highlight: inset 0 0 0 1000px rgba(255, 0, 0, 0.15);
+
     --light_highlight: inset 0 0 0 1000px rgb(255, 255, 255, 0.1);
     --dark_highlight: inset 0 0 0 1000px rgb(0, 0, 0, 0.1);
 
     --disabled: rgb(82, 67, 69);
     --on_disabled: rgb(214, 194, 195);
+
+    --error: rgb(147, 0, 10);
+    --on_error: rgb(255, 218, 214);
 }
 
 html {
@@ -30,61 +41,171 @@ html {
 }
 
 body {
-    text-align: center;
-    background-color: var(--background);
-    color: var(--on_background);
-    font-size: x-large;
     height: 100%;
     width: 100%;
-    position: fixed;
     margin: 0;
+    background-color: var(--background);
+    color: var(--on_background);
+    text-align: center;
+    font-size: x-large;
+}
+
+div.home,
+div.quiz_layout {
+    height: inherit;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+div.error {
+    background-color: var(--error);
+    color: var(--on_error);
+    flex: 1 0 auto;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+div.loading {
+    background-color: var(--primary_container);
+    color: var(--on_primary_container);
+    flex: 1 0 auto;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
 }
 
 a {
     text-decoration: none;
 }
 
-div.error {
+div.all_quizzes {
+    display: grid;
+    overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
 }
 
 a.quiz_start {
     background-color: var(--primary_container);
     color: var(--on_primary_container);
-    display: block;
+    padding-block: 2%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 a.quiz_start:is(:hover, :focus) {
     box-shadow: var(--light_highlight);
 }
 
-div.quiz_layout {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-}
-
-div.questions {
+div.quiz_questions,
+div.quiz_results {
     background-color: var(--primary_container);
     color: var(--on_primary_container);
-    height: 100%;
+    flex: 1 0 auto;
+
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+div.quiz_score {
+    height: 10%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+div.question_info,
+div.question_result_info {
+    height: 60%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    overflow-y: hidden;
+}
+
+div.question_description {
+    margin-top: 1%;
+}
+
+div.question_result_info.correct_answer {
+    box-shadow: var(--correct_highlight);
+}
+
+div.question_result_info.incorrect_answer {
+    box-shadow: var(--incorrect_highlight);
+}
+
+div.all_options {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 2%;
+    padding-inline: 10%;
+    overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
+}
+
+div.all_option_results {
+    background-color: var(--primary);
+    color: var(--on_primary);
+    margin-top: 2%;
+    padding-inline: 10%;
+    border-radius: 5px;
+    overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
 }
 
 label.option {
     background-color: var(--primary);
     color: var(--on_primary);
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    margin-block: 7%;
+    padding-block: 2%;
+    padding-inline: 5%;
+    border-radius: 5px;
+    box-shadow: var(--elevated_highlight);
 }
 
 label.option:is(:hover, :focus) {
     box-shadow: var(--dark_highlight);
 }
 
-input.option {
+div.option_result {
+    padding-block: 30%;
+}
+
+div.option_result.correct_option {
+    color: var(--correct);
+}
+
+div.option_result.incorrect_option {
+    color: var(--incorrect);
+}
+
+div.question_buttons {
+    height: 20%;
+
+    display: flex;
+    flex: row nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 button.question_change {
     background-color: var(--secondary);
     color: var(--on_secondary);
+    max-height: max-content;
     border: none;
+    border-radius: 50px;
+    padding-inline: 5%;
+    padding-block: 1%;
+    margin: 1%;
+    font-size: medium;
+    box-shadow: var(--elevated_highlight);
 }
 
 button.question_change:is(:hover, :focus):not(:disabled) {
@@ -96,12 +217,24 @@ button.question_change:disabled {
     color: var(--on_disabled);
 }
 
-a.quiz_submit {
+a.quiz_submit,
+a.all_quizzes {
     background-color: var(--tertiary);
     color: var(--on_tertiary);
-    display: block;
+
+    height: 10%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
 }
 
-a.quiz_submit:is(:hover, :focus) {
+a.quiz_submit:is(:hover, :focus):not(.disabled),
+a.all_quizzes:is(:hover, :focus) {
     box-shadow: var(--dark_highlight);
+}
+
+a.quiz_submit.disabled {
+    background-color: var(--disabled);
+    color: var(--on_disabled);
+    pointer-events: none;
 }

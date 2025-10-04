@@ -15,15 +15,17 @@ export async function clientLoader() {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
     return (
-        <div>
+        <div className="home">
             <h1>Quizzes</h1>
-            {loaderData.has_data ? (
-                loaderData.quizzes!.map((quiz) => {
-                    return <Quiz_C key={quiz.quiz_id} quiz={quiz} />;
-                })
-            ) : (
-                <div className="error"> The Quizzes Could not be loaded. </div>
-            )}
+            <div className="all_quizzes">
+                {loaderData.has_data ? (
+                    loaderData.quizzes!.map((quiz) => {
+                        return <Quiz_C key={quiz.quiz_id} quiz={quiz} />;
+                    })
+                ) : (
+                    <div className="error"> The Quizzes Could not be loaded. </div>
+                )}
+            </div>
         </div>
     );
 }
@@ -31,7 +33,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 function Quiz_C({ quiz }: { quiz: Quiz }) {
     return (
         <Link to={get_pathname_to_attempt_quiz(quiz)} className="quiz_start">
-            {quiz.name} {quiz.no_of_questions} question{quiz.no_of_questions == 1 ? "" : "s"}
+            <span>{quiz.name}</span>
+            <span>{`${quiz.no_of_questions} question${quiz.no_of_questions == 1 ? "" : "s"}`}</span>
         </Link>
     );
 }

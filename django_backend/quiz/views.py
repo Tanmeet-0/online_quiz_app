@@ -36,7 +36,6 @@ def start_quiz_and_get_all_questions(request: "HttpRequest", quiz_id: "int") -> 
     quiz = Quiz.objects.filter(quiz_id=quiz_id).first()
     if quiz != None:
         questions = Question_Serializer(quiz.questions.filter(correct_option__isnull=False).all(), many=True)
-        # check if all questions have correct answers
         response_data = json_renderer.render(questions.data)
         quiz.has_started = True
         quiz.save()
@@ -63,4 +62,4 @@ def submit_quiz_answers_and_get_result(request: "HttpRequest", quiz_id: "int") -
         else:
             return HttpResponseBadRequest("This quiz does not exist.")
     else:
-        return HttpResponse(content="JSON data expected.", status=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)  # add accept post header
+        return HttpResponse(content="JSON data expected.", status=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE, headers={"Accept-Post": "application/json"})

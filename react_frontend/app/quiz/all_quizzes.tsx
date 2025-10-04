@@ -17,15 +17,16 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     return (
         <div className="home">
             <h1>Quizzes</h1>
-            <div className="all_quizzes">
-                {loaderData.has_data ? (
-                    loaderData.quizzes!.map((quiz) => {
+
+            {loaderData.has_data ? (
+                <div className="all_quizzes">
+                    {loaderData.quizzes!.map((quiz) => {
                         return <Quiz_C key={quiz.quiz_id} quiz={quiz} />;
-                    })
-                ) : (
-                    <div className="error"> The Quizzes Could not be loaded. </div>
-                )}
-            </div>
+                    })}
+                </div>
+            ) : (
+                <div className="error"> The Quizzes Could not be loaded. </div>
+            )}
         </div>
     );
 }

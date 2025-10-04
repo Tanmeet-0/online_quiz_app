@@ -1,0 +1,58 @@
+[
+    
+    {
+        "name": "Random Quiz",
+        "questions": [
+            {
+                "description": "How many minutes are in a full week?",
+                "options": [
+                    { "value": "10,080", "is_answer": true },
+                    { "value": "6,04,800", "is_answer": false },
+                    { "value": "11,520", "is_answer": false },
+                    { "value": "20,100", "is_answer": false },
+                    { "value": "1,00,000", "is_answer": false }
+                ]
+            },
+            {
+                "description": "How many faces does a Dodecahedron have?",
+                "options": [
+                    { "value": "10", "is_answer": false },
+                    { "value": "12", "is_answer": true },
+                    { "value": "14", "is_answer": false },
+                    { "value": "16", "is_answer": false },
+                    { "value": "18", "is_answer": false },
+                    { "value": "20", "is_answer": false }
+                ]
+            },
+            {
+                "description": "True or false: Halloween originated as an ancient Irish festival.",
+                "options": [
+                    { "value": "True", "is_answer": true },
+                    { "value": "False", "is_answer": false }
+                ]
+            },
+            {
+                "description": "What is the chemical element with the symbol Fe?",
+                "options": [
+                    { "value": "Iron", "is_answer": true },
+                    { "value": "Gold", "is_answer": false },
+                    { "value": "Silver", "is_answer": false },
+                    { "value": "Copper", "is_answer": false },
+                    { "value": "Titanium", "is_answer": false },
+                    { "value": "Xenon", "is_answer": false },
+                    { "value": "Fluorine", "is_answer": false },
+                    { "value": "Zinc", "is_answer": false }
+                ]
+            },
+            {
+                "description": "In what country is the Chernobyl nuclear plant located?",
+                "options": [
+                    { "value": "Ukraine", "is_answer": true },
+                    { "value": "Russia", "is_answer": false },
+                    { "value": "Belarus", "is_answer": false },
+                    { "value": "Estonia", "is_answer": false }
+                ]
+            }
+        ]
+    }
+]

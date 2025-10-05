@@ -6,7 +6,7 @@ import json
 
 class Command(BaseCommand):
     help = "Loads quizzes from a json file into the database"
-    missing_args_message = "Provide either the relative path of the json file in respect to manage.py or the absolute path to the file."
+    missing_args_message = "Provide either the relative path of the json file with respect to manage.py or the absolute path to the file."
 
     JSON_FILE_ARGUMENT_NAME = "json_file_path"
 
@@ -14,7 +14,7 @@ class Command(BaseCommand):
         parser.add_argument(
             self.JSON_FILE_ARGUMENT_NAME,
             type=str,
-            help="Either the relative path of the json file in respect to manage.py or the absolute path to the file.",
+            help="Either the relative path of the json file with respect to manage.py or the absolute path to the file.",
         )
 
     def handle(self, *args, **options) -> str | None:

@@ -1,7 +1,6 @@
 [
-    
     {
-        "name": "Random Quiz",
+        "name": "Random",
         "questions": [
             {
                 "description": "How many minutes are in a full week?",
@@ -51,6 +50,105 @@
                     { "value": "Russia", "is_answer": false },
                     { "value": "Belarus", "is_answer": false },
                     { "value": "Estonia", "is_answer": false }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Animals",
+        "questions": [
+            {
+                "description": "How many hearts does an octopus have?",
+                "options": [
+                    { "value": "0", "is_answer": false },
+                    { "value": "1", "is_answer": false },
+                    { "value": "2", "is_answer": false },
+                    { "value": "3", "is_answer": true },
+                    { "value": "4", "is_answer": false }
+                ]
+            },
+            {
+                "description": "What is a group of pandas known as?",
+                "options": [
+                    { "value": "A Caravan", "is_answer": false },
+                    { "value": "An Embarrassment", "is_answer": true },
+                    { "value": "A Herd", "is_answer": false },
+                    { "value": "A Mob", "is_answer": false },
+                    { "value": "An Aggregation", "is_answer": false },
+                    { "value": "A Colony", "is_answer": false },
+                    { "value": "A Prickle", "is_answer": false }
+                ]
+            },
+            {
+                "description": "How many eyes does a honeybee have?",
+                "options": [
+                    { "value": "5", "is_answer": true },
+                    { "value": "4", "is_answer": false },
+                    { "value": "3", "is_answer": false },
+                    { "value": "2", "is_answer": false }
+                ]
+            },
+            {
+                "description": "How many bones does a shark have?",
+                "options": [
+                    { "value": "0", "is_answer": true },
+                    { "value": "50", "is_answer": false },
+                    { "value": "73", "is_answer": false }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "File Extensions",
+        "questions": [
+            {
+                "description": "What is the file type of a .BMP file?",
+                "options": [
+                    { "value": "Bitmap Image", "is_answer": true },
+                    { "value": "MS-DOS Batch", "is_answer": false },
+                    { "value": "Visual Basic", "is_answer": false }
+                ]
+            },
+            {
+                "description": "Text files have a .TXT extension.",
+                "options": [
+                    { "value": "True", "is_answer": true },
+                    { "value": "False", "is_answer": false }
+                ]
+            },
+            {
+                "description": "What is the file type of a .SLK file?",
+                "options": [
+                    { "value": "Swift source code", "is_answer": false },
+                    { "value": "Video", "is_answer": false },
+                    { "value": "Scratch Project", "is_answer": false },
+                    { "value": "Smalltalk source code", "is_answer": false },
+                    { "value": "Symbolic Link", "is_answer": true }
+                ]
+            },
+            {
+                "description": "What is the full form of FFMPEG?",
+                "options": [
+                    { "value": "Frequency Fluidity Media Parameter Extraction Global", "is_answer": false },
+                    { "value": "Final Format Mapper Pipeline Editing Grid", "is_answer": false },
+                    { "value": "Fast Forward Moving Picture Experts Group", "is_answer": true },
+                    { "value": "Free Format Multi-Purpose Encoding Gateway", "is_answer": false }
+                ]
+            },
+            {
+                "description": "The full form of RAR is Remote Access Request.",
+                "options": [
+                    { "value": "True", "is_answer": false },
+                    { "value": "False", "is_answer": true }
+                ]
+            },
+            {
+                "description": "What is the file extension of an AutoHotKey script file?",
+                "options": [
+                    { "value": ".AUT", "is_answer": false },
+                    { "value": ".AHK", "is_answer": true },
+                    { "value": ".AKEY", "is_answer": false },
+                    { "value": ".KEY", "is_answer": false }
                 ]
             }
         ]

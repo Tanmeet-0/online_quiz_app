@@ -180,11 +180,16 @@ label.option {
     color: var(--on_primary);
     display: grid;
     grid-template-columns: 1fr 10fr;
+    text-wrap-style: balance;
     margin-block: 7%;
     padding-block: 2%;
     padding-inline: 5%;
     border-radius: 5px;
     box-shadow: var(--elevated_highlight);
+}
+
+input.option{
+    max-width: 25px;
 }
 
 label.option:is(:hover, :focus) {

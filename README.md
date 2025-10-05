@@ -73,7 +73,7 @@ If you are not using Bash shell or the setup script does not work, you can follo
 6. Load the sample quizzes into the database
 
     ```bash
-    python manage.py load_sample_quizzes sample_quizzes.json
+    python manage.py load_quizzes sample_quizzes.json
     ```
 
 7. Deactivate the virtual environment
@@ -154,6 +154,6 @@ After starting the servers, Visit [http://localhost:5173](http://localhost:5173)
 
 2. The quizzes can be replayed any number of times.
 
-3. No user friendly way to create new quizzes. Currently new quizzes can be made using either the Django admin site, the `load_sample_quizzes` command of manage.py or by manually modifying the database.
+3. No user friendly way to create new quizzes. Currently new quizzes can be made using either the Django admin site, the `load_quizzes` command of manage.py or by manually modifying the database.
 
 4. Decided to remove csrf protection from the django api because the django api only receives cross site requests and a cross site request cannot provide csrf protection.

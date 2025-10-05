@@ -1,1 +1,74 @@
 # Online Quiz Application
+
+A quiz website where you can attempt various quizzes, switch between questions, view your score and view the questions you got correct and incorrect.
+
+# Requirements
+
+- Python version 3.12.4 or higher
+- Node.js version 22.20.0 or higher
+
+Make sure to add both Python and Node.js to your operating system's PATH.
+
+# Setup
+
+## Automatic Setup
+If you are using Bash shell you can automatically setup both frontend and backend by running the setup script:
+```bash
+./server_setup.sh
+```
+
+## Manual Setup
+If you are not using Bash shell or the setup script does not work, you can follow these instructions to setup the project :
+
+1. Go to the django backend directory
+    ```bash
+    cd django_backend
+    ```
+
+2. Create a python virtual environment
+    ```bash
+    python -m venv virtual_env
+    ```
+
+3. Activate the virtual environment
+    - If you are using Bash Shell
+        ```bash
+        source virtual_env/Scripts/activate
+        ```
+
+    - If you are using Windows Command Prompt
+        ```bat
+        virtual_env/Scripts/activate.bat
+        ```
+
+4. Install all the required Python libraries in the virtual environment
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+5. Create the SQLite database
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+
+6. Load the sample quizzes into the database
+    ```bash
+    python manage.py load_sample_quizzes sample_quizzes.json
+    ```
+
+7. Deactivate the virtual environment
+    ```bash
+    deactivate
+    ```
+
+8. Go to the react frontend directory
+    ```bash
+    cd ..
+    cd react_frontend
+    ```
+
+9. Install all the required node dependencies
+    ```bash
+    npm install
+    ```

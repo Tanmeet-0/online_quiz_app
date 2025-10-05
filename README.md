@@ -57,9 +57,10 @@ If you are not using Bash shell or the setup script does not work, you can follo
         virtual_env/Scripts/activate.bat
         ```
 
-4. Install all the required Python libraries in the virtual environment
+4. Upgrade pip to latest version and install all the required Python libraries in the virtual environment
 
     ```bash
+    python -m pip install --upgrade pip
     pip install -r requirements.txt
     ```
 

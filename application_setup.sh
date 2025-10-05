@@ -4,6 +4,7 @@ echo "starting backend setup"
 cd django_backend
 python -m venv virtual_env
 source virtual_env/Scripts/activate
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate

@@ -91,6 +91,7 @@ a.quiz_start {
     background-color: var(--primary_container);
     color: var(--on_primary_container);
     padding-block: 2%;
+    margin-block: 1%;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -99,18 +100,24 @@ a.quiz_start:is(:hover, :focus) {
     box-shadow: var(--light_highlight);
 }
 
+div.quiz_info {
+    max-height: 25%;
+}
+
 div.quiz_questions,
 div.quiz_results {
     background-color: var(--primary_container);
     color: var(--on_primary_container);
     flex: 1 0 auto;
+    max-height: 75%;
 
     display: flex;
     flex-flow: column nowrap;
 }
 
 div.quiz_score {
-    height: 10%;
+    flex: 1 0 auto;
+    max-height: 10%;
 
     display: flex;
     flex-flow: column nowrap;
@@ -119,7 +126,7 @@ div.quiz_score {
 
 div.question_info,
 div.question_result_info {
-    height: 60%;
+    flex: 1 0 auto;
 
     display: flex;
     flex-flow: column nowrap;
@@ -127,8 +134,12 @@ div.question_result_info {
     overflow-y: hidden;
 }
 
-div.question_description {
-    margin-top: 1%;
+div.question_info {
+    max-height: 70%;
+}
+
+div.question_result_info {
+    max-height: 60%;
 }
 
 div.question_result_info.correct_answer {
@@ -139,6 +150,10 @@ div.question_result_info.incorrect_answer {
     box-shadow: var(--incorrect_highlight);
 }
 
+div.question_description {
+    margin-top: 1%;
+}
+
 div.all_options {
     display: grid;
     grid-template-columns: 1fr;
@@ -146,16 +161,18 @@ div.all_options {
     padding-inline: 10%;
     overflow-y: auto;
     scrollbar-gutter: stable both-edges;
+    scrollbar-color: var(--on_primary_container) rgba(0, 0, 0, 0);
 }
 
 div.all_option_results {
     background-color: var(--primary);
     color: var(--on_primary);
+    width: 30%;
     margin-top: 2%;
-    padding-inline: 10%;
     border-radius: 5px;
     overflow-y: auto;
     scrollbar-gutter: stable both-edges;
+    scrollbar-color: var(--on_primary) rgba(0, 0, 0, 0);
 }
 
 label.option {
@@ -175,7 +192,7 @@ label.option:is(:hover, :focus) {
 }
 
 div.option_result {
-    padding-block: 30%;
+    padding-block: 5%;
 }
 
 div.option_result.correct_option {
@@ -208,13 +225,14 @@ button.question_change {
     box-shadow: var(--elevated_highlight);
 }
 
-button.question_change:is(:hover, :focus):not(:disabled) {
+button.question_change:is(:hover) {
     box-shadow: var(--dark_highlight);
 }
 
 button.question_change:disabled {
     background-color: var(--disabled);
     color: var(--on_disabled);
+    box-shadow: none;
 }
 
 a.quiz_submit,
@@ -228,7 +246,7 @@ a.all_quizzes {
     justify-content: center;
 }
 
-a.quiz_submit:is(:hover, :focus):not(.disabled),
+a.quiz_submit:is(:hover, :focus),
 a.all_quizzes:is(:hover, :focus) {
     box-shadow: var(--dark_highlight);
 }
@@ -237,4 +255,5 @@ a.quiz_submit.disabled {
     background-color: var(--disabled);
     color: var(--on_disabled);
     pointer-events: none;
+    box-shadow: none;
 }

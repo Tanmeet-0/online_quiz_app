@@ -2,6 +2,8 @@
 
 A quiz website where you can attempt various quizzes, switch between questions, view your score and view the questions you got correct and incorrect.
 
+Made using Django and SQLite for the backend, and React, React-Router and Typescript for the frontend.
+
 # Requirements
 
 -   Python version 3.12.4 or higher from [https://www.python.org/downloads/](https://www.python.org/downloads/)
@@ -145,3 +147,13 @@ If you are not using Bash shell or the bash script does not work, you can follow
 ---
 
 After starting the servers, Visit [http://localhost:5173](http://localhost:5173) to view the application.
+
+# Design Choices I Made
+
+1. The quiz only supports Multiple Choice Questions.
+
+2. The quizzes can be replayed any number of times.
+
+3. No user friendly way to create new quizzes. Currently new quizzes can be made using either the Django admin site, the `load_sample_quizzes` command of manage.py or by manually modifying the database.
+
+4. Decided to remove csrf protection from the django api because the django api only receives cross site requests and a cross site request cannot provide csrf protection.

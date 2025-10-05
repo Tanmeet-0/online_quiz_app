@@ -4,23 +4,29 @@ A quiz website where you can attempt various quizzes, switch between questions, 
 
 # Requirements
 
-- Python version 3.12.4 or higher
-- Node.js version 22.20.0 or higher
+- Python version 3.12.4 or higher from [https://www.python.org/downloads/](https://www.python.org/downloads/)
+- Node.js version 22.20.0 or higher from [https://nodejs.org/en/download](https://nodejs.org/en/download)
 
-Make sure to add both Python and Node.js to your operating system's PATH.
+Make sure both Python and Node.js are added to your operating system's PATH.
 
-# Setup
+# Installing The Application
+
+Either download or clone the repository and go into the project's directory
+```bash
+git clone https://github.com/Tanmeet-0/online_quiz_app.git
+cd online_quiz_app
+```
 
 ## Automatic Setup
 If you are using Bash shell you can automatically setup both frontend and backend by running the setup script:
 ```bash
-./server_setup.sh
+./application_setup.sh
 ```
 
 ## Manual Setup
 If you are not using Bash shell or the setup script does not work, you can follow these instructions to setup the project :
 
-1. Go to the django backend directory
+1. Go into the django backend directory
     ```bash
     cd django_backend
     ```
@@ -62,7 +68,7 @@ If you are not using Bash shell or the setup script does not work, you can follo
     deactivate
     ```
 
-8. Go to the react frontend directory
+8. Go into the react frontend directory
     ```bash
     cd ..
     cd react_frontend
@@ -72,3 +78,4 @@ If you are not using Bash shell or the setup script does not work, you can follo
     ```bash
     npm install
     ```
+

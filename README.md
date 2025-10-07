@@ -134,7 +134,7 @@ If you are not using Bash shell or the bash script does not work, you can follow
     python manage.py runserver
     ```
 
-4. In another new terminal, go into the react backend directory
+4. In another new terminal, go into the react frontend directory
 
     ```bash
     cd react_frontend
